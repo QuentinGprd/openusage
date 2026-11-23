@@ -24,7 +24,7 @@ It uses Swift 6 with strict concurrency, and SwiftUI inside an AppKit status ite
 | `PopoverState` | The popover's screen and sheets. |
 | `WidgetDataStore` | The latest snapshot per account, refresh errors, and display settings. |
 | `AccountRenameStore` | Which account name is being edited. |
-| `TelemetryRecorder` | The daily ping and optional daily provider account counts. |
+| `TelemetryRecorder` | The daily ping and provider account counts. This build drops every event. |
 | `HideFromScreenShareSetting` | The Privacy Mode switch. |
 
 Accounts are the source of truth. Every `AccountStore` change runs `AppContainer.syncAccounts`,
@@ -63,7 +63,8 @@ into data for the views.
 
 `AppContainer.startRefreshing` runs at launch and then every 5 minutes (`RefreshSetting.interval`).
 
-- Each pass refreshes accounts, checks quota notifications, and ticks telemetry.
+- Each pass refreshes accounts, checks quota notifications, and ticks the telemetry recorder, whose
+  sink drops every event in this build.
 - An account is skipped if its snapshot is less than an interval old or it is in backoff
   (`RefreshBackoff`). Each account has a two-minute deadline.
 - Halfway between passes, `refreshHourlyReads` runs reads a provider must not get in the same burst
@@ -90,7 +91,7 @@ JSON. The command never refreshes and never opens the Keychain.
 
 - `UpdaterController` wraps Sparkle. Only `script/release.sh` writes `SUFeedURL`, so dev builds never
   check for updates. See [Updates](updates.md).
-- `PostHogTelemetrySink` sends the anonymous daily ping, crash reports, and optional daily account
-  counts by provider. Events name providers, never accounts. See [Privacy](privacy.md).
+- `NoopTelemetrySink` is the only telemetry sink in this build. The recorder still runs, but every
+  event is dropped locally: nothing about your use leaves the Mac. See [Privacy](privacy.md).
 - `AppLog` writes to unified logging (subsystem `OpenUsage`). It drops lines below the level set in
   Settings and redacts every message with `LogRedaction`. See [Debugging](debugging.md).

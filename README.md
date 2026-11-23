@@ -80,7 +80,7 @@ How everything works, in [docs/](docs/README.md):
 - [Command line](docs/cli.md)
 - [Updates](docs/updates.md)
 - [Proxy](docs/proxy.md)
-- [Privacy](docs/privacy.md), including optional daily provider account counts
+- [Privacy](docs/privacy.md): what stays on your Mac (this build sends no telemetry)
 
 ## License
 
@@ -130,8 +130,6 @@ The workflow needs these repository secrets (Settings → Secrets and variables 
 | `APPLE_TEAM_ID`              | your Apple Developer team ID                                          |
 | `SPARKLE_PUBLIC_KEY`         | base64 EdDSA public key, baked into the build as `SUPublicEDKey`      |
 | `SPARKLE_PRIVATE_KEY`        | base64 EdDSA private key used to sign the DMG                         |
-| `POSTHOG_CLI_API_KEY`        | PostHog personal API key used to upload dSYMs for crash symbolication |
-| `POSTHOG_CLI_PROJECT_ID`     | numeric PostHog project ID the dSYMs upload to                        |
 
 - Export the Developer ID Application certificate, with its private key, from Keychain Access as a
   `.p12`. Then run `base64 -i DeveloperID.p12 | pbcopy`.
@@ -139,8 +137,8 @@ The workflow needs these repository secrets (Settings → Secrets and variables 
   Passwords.
 - Generate the Sparkle key pair once with Sparkle's `generate_keys` tool. If the two keys don't match,
   signing is silently skipped.
-- The `POSTHOG_CLI_*` secrets only upload dSYMs so crash reports symbolicate. Without
-  `POSTHOG_CLI_API_KEY`, the workflow skips the upload with a warning and the release still ships.
+- This fork does not run the release workflow. Its dSYM upload step needs the upstream `POSTHOG_CLI_*`
+  secrets and is only relevant to upstream releases.
   The key comes from PostHog → Settings → Personal API keys, and the project ID is the number in your
   project URL.
 - Keep the repository public, because Sparkle fetches the DMG and appcast anonymously. After the first

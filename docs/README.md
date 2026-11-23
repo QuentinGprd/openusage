@@ -15,7 +15,7 @@ How the app behaves. If the app and a page here disagree, that is a bug.
 - [Providers](providers.md): how each provider signs in and what it shows
 - [Updates](updates.md): automatic updates, manual checks, and the beta channel
 - [Proxy](proxy.md): sending provider requests through a proxy
-- [Privacy](privacy.md): what stays on your Mac and what the anonymous telemetry sends
+- [Privacy](privacy.md): what stays on your Mac (this build sends no telemetry)
 
 ## For developers
 

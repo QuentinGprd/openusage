@@ -35,5 +35,5 @@ Every provider request, sign-in token exchanges included, and requests to a
 [CLIProxyAPI hub](cliproxyapi.md). These don't:
 
 - The sign-in page and its `localhost` callback, which use your browser's proxy settings.
-- [Update](updates.md) checks and the telemetry in [Privacy](privacy.md), which follow the macOS system
-  proxy settings.
+- [Updates](updates.md) checks, which follow the macOS system proxy settings. This build ships no
+  update feed and sends no telemetry.

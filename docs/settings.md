@@ -71,8 +71,6 @@ Use It or Lose It notify again once the limit recovers. Click a notification to 
 - **Privacy Mode.** Shows the app icon instead of your usage, and blurs account names in the panel,
   while your screen is shared or recorded. Copied pictures blur account names while it's on. Off by
   default.
-- **Help Make OpenUsage Better.** Sends optional daily account counts by provider. The daily active
-  ping and crash reports don't depend on it.
 
 See [Privacy](privacy.md).
 
