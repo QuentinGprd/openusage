@@ -1,0 +1,25 @@
+name: Fork verify
+
+# Fork-owned guard: fails if the telemetry removal regresses after an upstream sync. The macOS build
+# itself needs a Mac with Xcode; run it locally with script/fork/build_personal.sh.
+
+on:
+  push:
+    branches: [no-telemetry]
+  pull_request:
+    branches: [no-telemetry]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Verify no telemetry
+        run: ./script/fork/verify_no_telemetry.sh

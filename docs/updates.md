@@ -1,5 +1,9 @@
 # Updates
 
+This fork ships no update feed: builds made with `script/fork/build_personal.sh` never check for or
+install updates. Rebuild from the rebased `no-telemetry` branch instead. The rest of this page
+describes upstream OpenUsage.
+
 OpenUsage updates itself with [Sparkle](https://sparkle-project.org). It verifies every update before
 installing it.
 
