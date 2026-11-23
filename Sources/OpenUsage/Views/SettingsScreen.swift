@@ -199,12 +199,6 @@ struct SettingsScreen: View {
             Toggle(isOn: $hideFromScreenShare.isEnabled) {
                 titled("Privacy Mode", info: "Hide usage and account names from screen recordings")
             }
-            Toggle(isOn: Binding(
-                get: { container.telemetry.isEnabled },
-                set: { container.telemetry.setEnabled($0) }
-            )) {
-                titled("Help Make OpenUsage Better", info: "Share additional anonymous usage stats that tell the team where to improve.")
-            }
         } header: {
             Text("Privacy")
         }
